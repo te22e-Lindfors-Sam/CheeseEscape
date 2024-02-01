@@ -45,7 +45,18 @@ public class PlayerMovement : MonoBehaviour
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        RaycastHit hit;
+        if (Physics.Raycast(new Ray(orientation.position, orientation.forward), out hit, 0.6f))
+        {
+            if (hit.transform.gameObject.tag == "Ladder")
+            {
+                rb.AddForce(Vector3.up * moveSpeed * 4f, ForceMode.Force);
+            }
+        }
+        else
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
 
     }
 

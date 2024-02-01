@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class RatCatch : MonoBehaviour
 {
-    void OnCollisionEnter(Collision col)
-    {
-        Debug.Log(col.gameObject.name);
-        if (col.gameObject.tag == "Player")
-        {
-            Debug.Log("tell me");
-        }
-    }
+    [SerializeField] Transform spawnPos;
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.gameObject.name);
+        if (col.gameObject.tag == "Player")
+        {
+            col.gameObject.transform.position = spawnPos.position;
+        }
     }
 }
+
